@@ -20,3 +20,5 @@ class Article {
         return date.toLocaleDateString();
     }
 }
+
+export default Article;
