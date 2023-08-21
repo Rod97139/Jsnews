@@ -4,6 +4,7 @@
 
 import Article from '../../js/article.js';
 import ArticleManager from '../../js/articleManager.js';
+import { addFavorite } from '../../js/favotiesManager.js';
 
 fetch('http://localhost:4000/api/article')
     .then(data => data.json())
@@ -15,8 +16,8 @@ fetch('http://localhost:4000/api/article')
                                                                     <div class="card-header ">
                                                                         <h5 class="card-title d-flex justify-content-between">${article.title}<span class="publication-date">${article.getFormattedDate()}</span></h5>
                                                                     </div>
-                                                                    <img src="../../../backend/${article.image}" class="card-img-top">
-                                                                    <span class="fa-stack fa-2x addFavorite">
+                                                                    <img src="http://localhost:4000/${article.image}" class="card-img-top">
+                                                                    <span data-id="${article.id}" class="fa-stack fa-2x addFavorite">
                                                                         <i class="fas fa-star fa-stack-1x"></i>
                                                                         <i class="far fa-star fa-stack-1x"></i>
                                                                     </span>
@@ -26,8 +27,11 @@ fetch('http://localhost:4000/api/article')
                                                                 </div>
                                                             </div>`;
         }
-        // let listeArticles = jsonListeArticles.map(jsonArticle => new Article(jsonArticle));
-        // let articleManager = new ArticleManager(listeArticles);
-        // articleManager.sort();
-        // articleManager.display();
+        let stars = document.querySelectorAll(".addFavorite")
+        for (let star of stars) {
+            star.addEventListener('click', () => {
+                addFavorite(star.dataset.id);
+                star.setAttribute('class', 'fa-stack fa-2x addFavorite activated');
+            })
+        }
     })
