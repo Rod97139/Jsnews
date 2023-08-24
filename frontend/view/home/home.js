@@ -5,7 +5,7 @@
 import Article from '../../js/article.js';
 import ArticleManager from '../../js/articleManager.js';
 import { loadConfig } from '../../js/config.js';
-import { addFavorite } from '../../js/favotiesManager.js';
+import { addFavorite } from '../../js/favoriesManager.js';
 
 
 loadConfig().then(data => {
